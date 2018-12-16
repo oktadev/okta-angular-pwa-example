@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { OktaAuthModule } from '@okta/okta-angular';
+
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from "@angular/flex-layout";
@@ -48,7 +50,13 @@ import { CachingInterceptor } from './cache/caching-interceptor.service';
     MatDividerModule,
     MatProgressSpinnerModule,
     AppRoutingModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    OktaAuthModule.initAuth({
+      issuer: 'https://{yourOktaDomain}/oauth2/default',
+      redirectUri: 'http://localhost:8080/implicit/callback',
+      clientId: '{YourClientId}'
+    })
+
   ],
   providers: [
       RequestCache,
