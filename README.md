@@ -33,15 +33,11 @@ npm start
 
 ### Create a New OIDC App in Okta
 
-To create a new OIDC app on Okta:
+Before you begin, you’ll need a free Okta developer account. Install the [Okta CLI](https://cli.okta.com) and run `okta register` to sign up for a new account. If you already have an account, run `okta login`. Then, run `okta apps create`. Select the default app name, or change it as you see fit. Choose **Single-Page App** and press **Enter**.
 
-1. Log in to your developer account, navigate to **Applications**, and click on **Add Application**.
-3. Select **Single-Page App** and click **Next**. 
-4. Give the application a name, change all instances of `localhost:8080` to `localhost:4200` and click **Done**.
+Use `http://localhost:4200/callback` for the Redirect URI and set the Logout Redirect URI to `http://localhost:4200`.
 
-Set your `issuer` and copy the `clientId` in to `src/app/app.module.ts`. 
-
-**NOTE:** The value of `{yourOktaDomain}` should be something like `dev-123456.okta.com`. Make sure you don't include `-admin` in the value!
+Copy your `issuer` and copy the `clientId` in to `src/app/app.module.ts`. 
 
 ```ts
 const oktaConfig = {
@@ -59,7 +55,7 @@ This example uses the following open source libraries from Okta:
 
 ## Help
 
-Please post any questions as comments on the [blog post](https://developer.okta.com/blog/2019/01/30/first-angular-pwa), or visit our [Okta Developer Forums](https://devforum.okta.com/). You can also email developers@okta.com if would like to create a support ticket.
+Please post any questions as comments on the [blog post](https://developer.okta.com/blog/2019/01/30/first-angular-pwa), or visit our [Okta Developer Forums](https://devforum.okta.com/).
 
 ## License
 
