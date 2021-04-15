@@ -1,8 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router } from "@angular/router";
-
-import { BooksService } from './books/books.service';
+import { Router } from '@angular/router';
 import { OktaAuthService } from '@okta/okta-angular';
 
 @Component({
@@ -10,44 +8,44 @@ import { OktaAuthService } from '@okta/okta-angular';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'AngularBooksPWA';
   searchForm: FormGroup;
-  offline: boolean;
   isAuthenticated: boolean;
-  onNetworkStatusChange() {
-    this.offline = !navigator.onLine;
-    console.log('offline '+this.offline);
-  }
+  offline: boolean;
 
-  constructor (private formBuilder: FormBuilder,
-               private router: Router,
-               public oktaAuth: OktaAuthService) {
+  constructor(private formBuilder: FormBuilder,
+              private router: Router,
+              public oktaAuth: OktaAuthService) {
     this.oktaAuth.$authenticationState.subscribe(
       (isAuthenticated: boolean) => this.isAuthenticated = isAuthenticated
     );
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
+    this.oktaAuth.isAuthenticated().then((auth) => {this.isAuthenticated = auth});
     this.searchForm = this.formBuilder.group({
       search: ['', Validators.required],
     });
     window.addEventListener('online',  this.onNetworkStatusChange.bind(this));
     window.addEventListener('offline', this.onNetworkStatusChange.bind(this));
-    this.oktaAuth.isAuthenticated().then((auth) => {this.isAuthenticated = auth});
   }
 
-  onSearch() {
+  onSearch(): void {
     if (!this.searchForm.valid) { return; }
     this.router.navigate(['search'], { queryParams: {query: this.searchForm.get('search').value}});
   }
 
-  async login() {
+  async login(): Promise<void> {
     await this.oktaAuth.signInWithRedirect();
   }
 
-  async logout() {
+  async logout(): Promise<void> {
     await this.oktaAuth.signOut();
   }
 
+  onNetworkStatusChange(): void {
+    this.offline = !navigator.onLine;
+    console.log('offline ' + this.offline);
+  }
 }

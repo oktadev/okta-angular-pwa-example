@@ -1,6 +1,6 @@
 # Angular 7 PWA Example
  
-This example shows how to build a search app with Angular 7, Angular CLI, and Angular Material.
+This example shows how to build a search app with Angular, Angular CLI, and Angular Material.
 
 Please read [Build Your First PWA with Angular](https://developer.okta.com/blog/2019/01/30/first-angular-pwa) to see how this app was created.
 

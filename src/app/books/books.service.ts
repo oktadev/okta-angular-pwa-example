@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-
 import { HttpClient, HttpParams } from '@angular/common/http';
 
 const baseUrl = 'http://openlibrary.org';
@@ -12,17 +11,15 @@ export class BooksService {
   constructor(private http: HttpClient) { }
 
   async get(route: string, data?: any) {
-
     const url = baseUrl+route;
     let params = new HttpParams();
 
-    if (data!==undefined) {
+    if (data !== undefined) {
       Object.getOwnPropertyNames(data).forEach(key => {
         params = params.set(key, data[key]);
       });
     }
 
-    console.log('GET ' + JSON.stringify(data)+' '+url);
     const result = this.http.get(url, {
       responseType: 'json',
       params: params
