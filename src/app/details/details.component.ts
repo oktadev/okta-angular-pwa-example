@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -10,7 +9,6 @@ import { Subscription } from 'rxjs';
 })
 export class DetailsComponent implements OnInit {
   private subscription: Subscription;
-
   book: any;
 
   constructor(private route: ActivatedRoute) { }

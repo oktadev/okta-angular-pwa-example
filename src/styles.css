@@ -11,6 +11,7 @@ h1, h2 {
 
 .input-group {
   display: flex;
+  align-items: stretch;
 }
 
 .input-group-field {

@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpRequest, HttpResponse } from '@angular/common/http';
 
 const maxAge = 30000;
+@Injectable({
+  providedIn: 'root'
+})
 export class RequestCache  {
 
   cache = new Map();
@@ -10,7 +13,7 @@ export class RequestCache  {
     const url = req.urlWithParams;
     const cached = this.cache.get(url);
 
-    if (!cached) return undefined;
+    if (!cached) { return undefined; }
 
     const isExpired = cached.lastRead < (Date.now() - maxAge);
     const expired = isExpired ? 'expired ' : '';

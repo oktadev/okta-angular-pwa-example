@@ -1,32 +1,42 @@
 <mat-toolbar color="primary" class="expanded-toolbar">
-    <span>
-      <button mat-button routerLink="/">{{title}}</button>
-      <button mat-button routerLink="/"><mat-icon>home</mat-icon></button>
-    </span>
-    <div *ngIf="offline">offline</div>
-    <button mat-button *ngIf="!isAuthenticated" (click)="login()"> Login </button>
-    <button mat-button *ngIf="isAuthenticated" (click)="logout()"> Logout </button>
-
-    <div fxLayout="row" fxShow="false" fxShow.gt-sm>
-        <form [formGroup]="searchForm" (ngSubmit)="onSearch()">
-          <div class="input-group">
-            <input class="input-group-field" type="search" value="" placeholder="Search" formControlName="search">
-            <div class="input-group-button"><button mat-flat-button color="accent"><mat-icon>search</mat-icon></button></div>
-          </div>
-        </form>
-    </div>
-    <button mat-button [mat-menu-trigger-for]="menu" fxHide="false" fxHide.gt-sm>
-     <mat-icon>menu</mat-icon>
-    </button>
-</mat-toolbar>
-<mat-menu x-position="before" #menu="matMenu">
-    <button mat-menu-item routerLink="/"><mat-icon>home</mat-icon> Home</button>
-
+  <div *ngIf="offline">offline</div>
+  <span>
+    <button mat-button routerLink="/">{{title}}</button>
+    <button mat-button routerLink="/"><mat-icon>home</mat-icon></button>
+  </span>
+  <button mat-button *ngIf="!isAuthenticated" (click)="login()"> Login </button>
+  <button mat-button *ngIf="isAuthenticated" (click)="logout()"> Logout </button>
+  <div fxLayout="row" fxShow="false" fxShow.gt-sm>
     <form [formGroup]="searchForm" (ngSubmit)="onSearch()">
       <div class="input-group">
         <input class="input-group-field" type="search" value="" placeholder="Search" formControlName="search">
-        <div class="input-group-button"><button mat-button routerLink="/"><mat-icon>magnify</mat-icon></button></div>
+        <div class="input-group-button">
+          <button mat-flat-button color="accent">
+            <mat-icon>search</mat-icon>
+          </button>
+        </div>
       </div>
     </form>
+  </div>
+  <button mat-button [mat-menu-trigger-for]="menu" fxHide="false" fxHide.gt-sm>
+    <mat-icon>menu</mat-icon>
+  </button>
+</mat-toolbar>
+<mat-menu x-position="before" #menu="matMenu">
+  <button mat-menu-item routerLink="/">
+    <mat-icon>home</mat-icon>
+    Home
+  </button>
+
+  <form [formGroup]="searchForm" (ngSubmit)="onSearch()">
+    <div class="input-group">
+      <input class="input-group-field" type="search" value="" placeholder="Search" formControlName="search">
+      <div class="input-group-button">
+        <button mat-button routerLink="/">
+          <mat-icon>magnify</mat-icon>
+        </button>
+      </div>
+    </div>
+  </form>
 </mat-menu>
 <router-outlet></router-outlet>
