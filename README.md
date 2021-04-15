@@ -44,18 +44,18 @@ Set your `issuer` and copy the `clientId` in to `src/app/app.module.ts`.
 **NOTE:** The value of `{yourOktaDomain}` should be something like `dev-123456.okta.com`. Make sure you don't include `-admin` in the value!
 
 ```ts
-OktaAuthModule.initAuth({
+const oktaConfig = {
   issuer: 'https://{yourOktaDomain}/oauth2/default',
-  redirectUri: 'http://localhost:8080/implicit/callback',
-  clientId: '{clientId}'
-})
+  clientId: '{clientId}',
+  redirectUri: window.location.origin + '/callback'
+};
 ```
 
 ## Links
 
 This example uses the following open source libraries from Okta:
 
-* [Okta Angular SDK](https://github.com/okta/okta-oidc-js/tree/master/packages/okta-angular)
+* [Okta Angular SDK](https://github.com/okta/okta-angular)
 
 ## Help
 

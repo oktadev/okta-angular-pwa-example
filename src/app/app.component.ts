@@ -24,7 +24,7 @@ export class AppComponent {
                private router: Router,
                public oktaAuth: OktaAuthService) {
     this.oktaAuth.$authenticationState.subscribe(
-      (isAuthenticated: boolean)  => this.isAuthenticated = isAuthenticated
+      (isAuthenticated: boolean) => this.isAuthenticated = isAuthenticated
     );
   }
 
@@ -38,15 +38,16 @@ export class AppComponent {
   }
 
   onSearch() {
-    if (!this.searchForm.valid) return;
+    if (!this.searchForm.valid) { return; }
     this.router.navigate(['search'], { queryParams: {query: this.searchForm.get('search').value}});
   }
-  login() {
-    this.oktaAuth.loginRedirect();
+
+  async login() {
+    await this.oktaAuth.signInWithRedirect();
   }
 
-  logout() {
-    this.oktaAuth.logout('/');
+  async logout() {
+    await this.oktaAuth.signOut();
   }
 
 }
